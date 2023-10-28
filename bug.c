@@ -4,7 +4,9 @@
 #define MAXAD 101
 #define MAX_CIS_ADR 50
 
-
+// оце щоб програма була case insensitive 
+// І якщо ключове слово буде не в полі а в іншій змінній, 
+// то додам ще і його сюди
 void prevedpismena(char adresy[MAX_CIS_ADR][MAXAD]) {
     int i = 0;
     int j = 0;
@@ -37,6 +39,8 @@ void porovnej(char adresy[MAX_CIS_ADR][MAXAD]) {
     } else if (pocet_shod == 0) {
         printf("Not found\n");
     }
+    // Тут іще 3 варіант, коли pocet_shod > 1 
+    // в змінну вкласти в алф порядку доступні літери і виписать її
 }
 
 int main(int argc, char *argv[]) {
@@ -46,7 +50,10 @@ int main(int argc, char *argv[]) {
     }
     char adresy[MAX_CIS_ADR][MAXAD];
     int pocet_adr = 0;
-
+// не знаю, як мені вкласти адреси поля
+// і як тоді вкласти ключове слово.
+// Для порівняння функції є, відповідно до того,
+// які будуть поле і ключ відкоректую їх 
     FILE *file = stdin;
 
     int c;
@@ -63,9 +70,7 @@ int main(int argc, char *argv[]) {
         }
         
     }
-    for(int i = 0; i < MAX_CIS_ADR; i++){
-    printf("N");
-    }
+    
     prevedpismena(adresy);
     porovnej(adresy);
 
