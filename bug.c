@@ -37,12 +37,12 @@ void porovnej(char adresy[MAX_CIS_ADR][MAXAD], char *klic) {
     while(i < MAX_CIS_ADR){
             if(strcmp(klic[0], adresy[i][0] != 0)){
                 break;  
-            } else { 
+            } else { shoda = adresy[i][0];
             pocet_shod++;
             }
         i++;
     }
-  
+//як зробити коли співпадінь більше і вивести дозволені літери 
 
     if (pocet_shod == 1) {
         printf("Found: %s\n", shoda);
