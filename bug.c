@@ -4,10 +4,8 @@
 #define MAXAD 101
 #define MAX_CIS_ADR 50
 
-// оце щоб програма була case insensitive 
-// І якщо ключове слово буде не в полі а в іншій змінній, 
-// то додам ще і його сюди
-void prevedpismena(char adresy[MAX_CIS_ADR][MAXAD]) {
+//funkce pro prevod vsech pismen na mala
+void prevedpismena(char adresy[MAX_CIS_ADR][MAXAD], char *klic) {
     int i = 0;
     int j = 0;
 
@@ -21,14 +19,31 @@ void prevedpismena(char adresy[MAX_CIS_ADR][MAXAD]) {
         j = 0;
         i++;
     }
+
+    for (int i = 0; klic[i]; i++) {
+        if (klic[i] >= 'A' && klic[i] <= 'Z') {
+            klic[i] = klic[i] + ('a' - 'A');
+        }
+    }
 }
 
-void porovnej(char adresy[MAX_CIS_ADR][MAXAD]) {
+// hlavni funkce pro porovnani a vystup
+void porovnej(char adresy[MAX_CIS_ADR][MAXAD], char *klic) {
     char shoda[MAXAD];
     int pocet_shod = 0;
-
-    for (int i = 2; i < MAX_CIS_ADR; i++) {
-        if (strcmp(adresy[1], adresy[i]) == 0) {
+    int i = 0;
+    int j = 0;
+    while(i < MAX_CIS_ADR){
+            if(strcmp(klic[j], adresy[i][j] != 0)){
+                break;  
+            } else { 
+            pocet_shod++;
+            j++;
+            continue;}
+        i++;
+    }
+    for (int i = 0; i < MAX_CIS_ADR; i++) {
+        if (strcmp(klic[i], adresy[i]) == 0) {
             pocet_shod++;
             strcpy(shoda, adresy[i]);
         }
@@ -39,22 +54,42 @@ void porovnej(char adresy[MAX_CIS_ADR][MAXAD]) {
     } else if (pocet_shod == 0) {
         printf("Not found\n");
     }
-    // Тут іще 3 варіант, коли pocet_shod > 1 
-    // в змінну вкласти в алф порядку доступні літери і виписать її
 }
 
+
+
+
 int main(int argc, char *argv[]) {
-    if (argc < 2) {
+    if (argc < 1) {
         printf("Chybí argumenty\n");
         return 1;
     }
     char adresy[MAX_CIS_ADR][MAXAD];
-    int pocet_adr = 0;
-// не знаю, як мені вкласти адреси у поле
-// і як тоді вкласти ключове слово. (чи в саме поле чи в іншу змінну)
-    
-// Для порівняння функції є, відповідно до того,
-// які будуть поле і ключ відкоректую їх 
+    //ulozeni klice do pole
+  
+    const char *retezec = argv[1];  // Získání prvního argumentu
+     
+
+    int klic[MAXAD];  // Pole integerů s pevnou délkou
+
+    // Převod znaků na ASCII hodnoty a uložení do pole integerů
+    for (int i = 0; i < MAXAD; i++) {
+        klic[i] = (int)retezec[i];
+    }
+
+    // Výpis výsledného pole integerů
+    //printf("Pole integerů: ");
+   // for (int i = 0; i < delka; i++) {
+   //     printf("%d ", klic[i]);
+   // }
+   // printf("\n");
+   
+
+
+
+
+
+
     FILE *file = stdin;
 
     int c;
@@ -62,18 +97,36 @@ int main(int argc, char *argv[]) {
     int j = 0;
     while(i < MAX_CIS_ADR){
         while (j < MAXAD && (c = fgetc(file)) != EOF){
-            adresy[i][j] == c;
+            adresy[i][j] = c;
+            //printf("%d\n", adresy[i][j]);
             j++;
-            if (c == '\0' || c == ' '){
+            if (c == '\0' || c == ' ' || c == 10){
                 adresy[i][j] = '\0';
                 j = 0;
+                i++;
             }
         }
         
     }
+
+    prevedpismena(adresy[MAX_CIS_ADR][MAXAD], *klic);
+    porovnej(adresy[MAX_CIS_ADR][MAXAD], *klic);
+
+
+//int n = 0;
+//int m = 0;
+
+//while(n < MAX_CIS_ADR){
+  //  while(m < MAXAD){
+   //     printf("%d\n", adresy[i][j]);
+  //      j++;
+//}
+//    i++;
+//}
+
     
-    prevedpismena(adresy);
-    porovnej(adresy);
+    //prevedpismena(adresy);
+   // porovnej(adresy);
 
     return 0;
 }
