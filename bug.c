@@ -34,22 +34,15 @@ void porovnej(char adresy[MAX_CIS_ADR][MAXAD], char *klic) {
     int i = 0;
     int j = 0;
     // як тепер порівняти ці поля?
-    // так аби якщо klic[0] i adresy[i][0] не сходяться щоб далі не перевіряло
     while(i < MAX_CIS_ADR){
-            if(strcmp(klic[j], adresy[i][j] != 0)){
+            if(strcmp(klic[0], adresy[i][0] != 0)){
                 break;  
             } else { 
             pocet_shod++;
-            j++;
-            continue;}
+            }
         i++;
     }
-    for (int i = 0; i < MAX_CIS_ADR; i++) {
-        if (strcmp(klic[i], adresy[i]) == 0) {
-            pocet_shod++;
-            strcpy(shoda, adresy[i]);
-        }
-    }
+  
 
     if (pocet_shod == 1) {
         printf("Found: %s\n", shoda);
